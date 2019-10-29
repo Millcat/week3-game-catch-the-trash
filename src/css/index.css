@@ -1,0 +1,147 @@
+/* police here */
+@import url('https://fonts.googleapis.com/css?family=Seaweed+Script&display=swap');
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    font-family: 'Seaweed Script', cursive;
+    color: rgb(17, 80, 122);
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    border: 5px solid black;
+    background-image: url("../../images/under-the-sea-game-background.png");
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+}
+
+.titleAndTrash {
+    display: block;
+    margin: 20px auto 0;
+}
+
+h1 {
+    width: 400px;
+    font-size: 50px;
+    text-align: center;
+    border: 4px dotted #1C6EA4;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.trash {
+    text-align: center;
+    margin: 25px auto 0 auto;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trash-img+.trash-img {
+    margin-left: 10px;
+}
+
+.trash-img.shoe {
+    height: 50px;
+    display: block;
+}
+
+.trash-img.bottle {
+    height: 70px;
+    display: block;
+    transform: rotate(10deg);
+}
+
+.trash-img.bag {
+    height: 70px;
+    display: block;
+    margin-left: 30px;
+    transform: rotate(-15deg);
+}
+
+.start {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.diver-start-page {
+    width: 250px;
+    position: absolute;
+    top: 40%;
+    left: 20px;
+}
+
+.turtle-start-page {
+    width: 100px;
+    position: absolute;
+    top: 40%;
+    right: 150px;
+}
+
+.rule {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+a.button {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding: 10px 30px;
+    border: 2px white;
+    border-radius: 20px;
+    font-weight: 300;
+    text-align: center;
+    background-color: teal;
+}
+
+a.button:hover {
+    border-color: white;
+}
+
+
+/* ABOVE : CSS for the first page. Put in a different file "start-page.css" for example ? */
+
+#sea-screen {
+    width: 1000px;
+    height: 600px;
+    background-image: url("../../images/under-the-sea-game-background.png");
+    background-size: cover;
+    background-position: bottom;
+    position: relative;
+}
+
+#player {
+    width: 100px;
+    position: absolute;
+    top: 200px;
+    left: 100px;
+}
+
+#turtle {
+    width: 70px;
+    position: absolute;
+    top: 400px;
+    left: 700px;
+}
+
+#shoe {
+    width: 50px;
+    position: absolute;
+    top: 400px;
+    left: 200px;
+}
+
+/* .getAndScore {
+    border-bottom: 5px solid rgb(17, 80, 122);
+} */
