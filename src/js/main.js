@@ -8,11 +8,6 @@ const trashShoeImg = document.getElementById("shoe");
 
 const trashes = []; // par défaut vide. Je veux 5 chaussures qui tombent.
 
-// setInterval(() => { // toutes les 4 sec va add une nouvelle trash
-//     arrayShoes.push(new Trash(150, -50, trashShoeImg));
-// }, 4000);
-// console.log(arrayShoes);
-
 //************************************************
 // Fluid move
 
@@ -26,6 +21,7 @@ window.onkeyup = function (e) { // quand touche est relevée, le statut de la to
     keyState[e.code] = false;
 };
 
+//************************************************
 var count = 0;
 
 function gameLoop() {
@@ -44,13 +40,30 @@ function gameLoop() {
     turtle.moveLeft(); // first moveLeft
     turtle.moveRight(); // then moveRight but stop loop after that
 
-    trashes.forEach(trash => {
-        // console.log( shoe)
-        trash.fall(); //il faudra faire un forEach sur mon arrayShoes et pour chaque newShoe = .fall()
+    let trashTouchedIndex;
+    let hasLost = false;
+    trashes.forEach((trash, i) => {
+        trash.fall();
+
+        if (trash.touches(diver.domElement)) {
+            trashTouchedIndex = i;
+            diver.catch();
+            document.querySelector(".container").removeChild(trash.domElement);
+        }
+
+        if (trash.touches(turtle.domElement)) {
+            hasLost = true;
+        }
     });
 
-    requestAnimationFrame(gameLoop); // s'appelle à elle-meme
+    if (trashTouchedIndex) {
+        trashes.splice(trashTouchedIndex, 1);
+    }
+
+    if (hasLost) {
+        // @todo Afficher panneau perdu
+    } else {
+        requestAnimationFrame(gameLoop); // s'appelle à elle-meme
+    }
 }
 requestAnimationFrame(gameLoop); //requestAnimationFrame demande au navigateur de faire appel à gameLoop (qui est une callback function)
-
-//************************************************

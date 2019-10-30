@@ -3,6 +3,7 @@ class Diver {
     this.x = x;
     this.y = y;
     this.domElement = domElement;
+    this.score = 0;
     // this.outLeft = false;
     // this.node = document.createElement("img"); // créer mon image dans mon HTML
     // document.getElementById("sea-screen").appendChild(this.node);
@@ -12,6 +13,11 @@ class Diver {
   updateInDom() { // permet de mettre à jour la position du diver dans le CSS
     this.domElement.style.left = this.x + "px"; // l'inscrit dans le CSS, par exemple si this.x a bougé de 350 ==> left: "350px"
     this.domElement.style.top = this.y + "px";
+  }
+
+  catch () {
+    this.score++;
+    document.querySelector(".trashCollected").innerHTML = this.score;
   }
 
   isOutRight() {
@@ -128,7 +134,6 @@ class Trash {
     const img = document.createElement("img"); //
     img.src = src; // la propriété img.src sera égale au lien de l'image fournie en paramètre
     img.id = this.cssClass + Date.now(); // un id aléatoire lui sera attribué
-    console.log(img.id);
     img.style.top = this.y + "px"; //
     img.style.left = this.x + "px";
     img.className = this.cssClass;
@@ -141,9 +146,19 @@ class Trash {
 
   fall() {
     if (this.y < 500) { // 500 = le sable où je veux qu'elle tombe ! à éviter
-      this.y += 1;
+      this.y += 2;
       this.updateInDom();
     }
+  }
+
+  touches(catcher) {
+    const aRect = this.domElement.getBoundingClientRect();
+    const bRect = catcher.getBoundingClientRect();
+
+    return aRect.left < bRect.right &&
+      aRect.right > bRect.left &&
+      aRect.top < bRect.bottom &&
+      aRect.bottom > bRect.top;
   }
 }
 
