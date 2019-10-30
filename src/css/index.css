@@ -49,6 +49,7 @@ h1 {
     margin-left: 10px;
 }
 
+
 .trash-img.shoe {
     height: 50px;
     display: block;
@@ -78,6 +79,21 @@ h1 {
     position: absolute;
     top: 40%;
     left: 20px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+
+    50% {
+        transform: translatey(-20px);
+    }
+
+    100% {
+        transform: translatey(0px);
+    }
 }
 
 .turtle-start-page {
@@ -85,19 +101,22 @@ h1 {
     position: absolute;
     top: 40%;
     right: 150px;
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0.5s;
+
 }
 
 .rule {
     text-align: center;
     font-size: 30px;
-    margin-top: 40px;
+    margin-top: 70px;
 }
 
 a.button {
     text-decoration: none;
     color: white;
-    font-size: 20px;
-    padding: 10px 30px;
+    font-size: 30px;
+    padding: 20px 30px;
     border: 2px white;
     border-radius: 20px;
     font-weight: 300;
@@ -122,14 +141,21 @@ a.button:hover {
 }
 
 #player {
-    width: 100px;
+    width: 200px;
+    height: 120px;
     position: absolute;
     top: 200px;
     left: 100px;
 }
 
+/* attribuer ces propriétés au diver quand il bouge vers la droite et doit se retourner vers la gauche et inversement */
+/* #player:hover {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+} */
+
 #turtle {
-    width: 70px;
+    width: 100px;
     position: absolute;
     top: 400px;
     left: 700px;
@@ -142,6 +168,29 @@ a.button:hover {
     left: 200px;
 }
 
-/* .getAndScore {
-    border-bottom: 5px solid rgb(17, 80, 122);
-} */
+.getAndScore {
+    border: 5px dotted white;
+    border-radius: 10px;
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    right: 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.score {
+    font-size: 30px;
+    color: white;
+    display: block;
+    margin: 0;
+    padding: 10px;
+
+}
+
+.garbage {
+    height: 50px;
+    display: block;
+}
