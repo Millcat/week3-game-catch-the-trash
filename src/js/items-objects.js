@@ -3,7 +3,7 @@ class Diver {
     this.x = x;
     this.y = y;
     this.domElement = domElement;
-    this.outLeft = false;
+    // this.outLeft = false;
     // this.node = document.createElement("img"); // créer mon image dans mon HTML
     // document.getElementById("sea-screen").appendChild(this.node);
     // permet de localiser mon image dans mon HTML (dans la div parent)
@@ -19,9 +19,6 @@ class Diver {
 
     return this.x > (screenSizeX - diverImg.width); // is out if this.x > (1000-100)
   }
-
-
-
 
   isOutLeft() {
     return this.x < 0;
@@ -51,6 +48,7 @@ class Diver {
     if (keyState['ArrowDown'] && !this.isOutBottom()) {
       this.y += 3;
     }
+    this.updateInDom();
   }
 }
 
@@ -91,6 +89,7 @@ class Turtle {
     }
     if (this.x <= 0) this.outLeft = true;
     // ne se déplace donc plus de -2 (vers la gauche) car outLeft devient true
+    this.updateInDom();
   }
   moveRight() {
     const screenSizeX = document.querySelector(".container").offsetWidth;
@@ -100,24 +99,50 @@ class Turtle {
     if (this.x + width < screenSizeX && this.outLeft) {
       this.domElement.style.transform = "scaleX(-1)"; // turtle se retourne quand elle part à droite
       this.x += 2;
-      console.log("in mv Right"); //et compteur stop après
+      // console.log("in mv Right"); //et compteur stop après
     }
     if (this.x + width >= screenSizeX && this.outLeft) {
       this.outLeft = false;
-      console.log("in mv Right and if > width");
+      // console.log("in mv Right and if > width");
+    }
+    this.updateInDom();
+  }
+}
+
+//*******************************************************************/
+
+
+class Trash {
+  constructor(x, y, imgSrc, cssClass) {
+    this.x = x;
+    this.y = y;
+    this.cssClass = cssClass;
+    this.domElement = this.createElement(imgSrc);
+  }
+
+  createElement(src) {
+    const img = document.createElement("img");
+    img.src = src;
+    img.id = this.cssClass + Date.now();
+    img.style.top = this.y + "px";
+    img.style.left = this.x + "px";
+    img.className = this.cssClass;
+    return document.querySelector(".container").appendChild(img);
+  }
+
+  updateInDom() { // permet de mettre à jour la position du diver dans le CSS et de le voir à l'écran
+    this.domElement.style.left = this.x + "px"; // l'inscrit dans le CSS, par exemple si this.x a bougé de 350 ==> left: "350px"
+    this.domElement.style.top = this.y + "px";
+  }
+
+  fall() {
+    const height = this.domElement.getBoundingClientRect().height;
+    if (this.y < 500) { // 500 = le sable où je veux qu'elle tombe
+      this.y += 1; // why ne s'incrémente pas?
+      this.updateInDom();
     }
   }
 }
 
-
-
-
-
-// class Trash {
-//   constructor(x) {
-//     // car à l'init. tombera sur l'axe x
-//   }
-//   fall() {}
-// }
 
 // ***********************

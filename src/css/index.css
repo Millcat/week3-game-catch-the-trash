@@ -15,7 +15,7 @@ html {
     height: 600px;
     margin: 0 auto;
     border: 5px solid black;
-    background-image: url("../../images/under-the-sea-game-background.png");
+    background-image: url("./../images/under-the-sea-game-background.png");
     background-size: cover;
     background-position: bottom;
     position: relative;
@@ -50,18 +50,18 @@ h1 {
 }
 
 
-.trash-img.shoe {
+.trash-img.chaussure {
     height: 50px;
     display: block;
 }
 
-.trash-img.bottle {
+.trash-img.bouteille {
     height: 70px;
     display: block;
     transform: rotate(10deg);
 }
 
-.trash-img.bag {
+.trash-img.sac {
     height: 70px;
     display: block;
     margin-left: 30px;
@@ -135,7 +135,7 @@ a.button:hover {
 #sea-screen {
     width: 1000px;
     height: 600px;
-    background-image: url("../../images/under-the-sea-game-background.png");
+    background-image: url("./../images/under-the-sea-game-background.png");
     background-size: cover;
     background-position: bottom;
     position: relative;
@@ -145,22 +145,40 @@ a.button:hover {
     width: 200px;
     height: 120px;
     position: absolute;
-    top: 200px;
+    /* top: 200px;
     left: 100px;
+    pas besoin vu qu'on créé une nouvelle instance*/
 }
 
 #turtle {
     width: 100px;
     position: absolute;
-    top: 400px;
-    left: 700px;
+    /* top: 400px;
+    left: 700px; */
 }
 
-#shoe {
+.shoe {
+    width: 70px;
+    position: absolute;
+    height: 42px;
+    /* top: 0px;
+    left: 100px; */
+}
+
+.bottle {
+    width: 25px;
+    position: absolute;
+    top: 520px;
+    left: 450px;
+    transform: rotate(10deg);
+}
+
+.plasticBag {
     width: 50px;
     position: absolute;
-    top: 400px;
-    left: 200px;
+    top: 520px;
+    left: 700px;
+    transform: rotate(-15deg);
 }
 
 .getAndScore {

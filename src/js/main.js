@@ -1,10 +1,17 @@
 const diverImg = document.getElementById("diver");
-const diver = new Diver(50, 10, diverImg);
+const diver = new Diver(50, 0, diverImg);
 
 const turtleImg = document.getElementById("turtle");
 const turtle = new Turtle(800, 430, turtleImg);
-// turtleImg.getBoundingClientRect
-const trashes = []; // par défaut vide
+
+const trashShoeImg = document.getElementById("shoe");
+
+const trashes = []; // par défaut vide. Je veux 5 chaussures qui tombent.
+
+// setInterval(() => { // toutes les 4 sec va add une nouvelle trash
+//     arrayShoes.push(new Trash(150, -50, trashShoeImg));
+// }, 4000);
+// console.log(arrayShoes);
 
 //************************************************
 // Fluid move
@@ -19,12 +26,26 @@ window.onkeyup = function (e) { // quand touche est relevée, le statut de la to
     keyState[e.code] = false;
 };
 
+var count = 0;
+
 function gameLoop() {
     diver.move(keyState); // checke le move à faire en fonction de la touche du clavier
-    diver.updateInDom();
+
+    count++;
+    if (count >= 240) {
+        trashes.push(new Trash(150, -50, "./images/trash_images/basket.png", "shoe"));
+        trashes.push(new Trash(450, -50, "./images/trash_images/bouteille.png", "bottle"));
+        count = 0;
+    }
+
     turtle.moveLeft(); // first moveLeft
     turtle.moveRight(); // then moveRight but stop loop after that
-    turtle.updateInDom(); // checke la position dans le DOM et update le CSS
+
+    trashes.forEach(trash => {
+        // console.log( shoe)
+        trash.fall(); //il faudra faire un forEach sur mon arrayShoes et pour chaque newShoe = .fall()
+    });
+
     requestAnimationFrame(gameLoop); // s'appelle à elle-meme
 }
 requestAnimationFrame(gameLoop); //requestAnimationFrame demande au navigateur de faire appel à gameLoop (qui est une callback function)
