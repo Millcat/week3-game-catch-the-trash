@@ -82,6 +82,7 @@ h1 {
     animation: float 4s ease-in-out infinite;
 }
 
+/* permet de rajouter l'animation de flottement !! en ajoutant animation: float sur les elements targets */
 @keyframes float {
     0% {
         transform: translatey(0px);
@@ -140,19 +141,13 @@ a.button:hover {
     position: relative;
 }
 
-#player {
+#diver {
     width: 200px;
     height: 120px;
     position: absolute;
     top: 200px;
     left: 100px;
 }
-
-/* attribuer ces propriétés au diver quand il bouge vers la droite et doit se retourner vers la gauche et inversement */
-/* #player:hover {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-} */
 
 #turtle {
     width: 100px;
