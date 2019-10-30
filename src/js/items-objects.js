@@ -113,32 +113,35 @@ class Turtle {
 
 
 class Trash {
-  constructor(x, y, imgSrc, cssClass) {
-    this.x = x;
-    this.y = y;
-    this.cssClass = cssClass;
-    this.domElement = this.createElement(imgSrc);
+  constructor(y, imgSrc, cssClass) {
+    // prend en paramètres :
+    const screenSizeX = document.querySelector(".container").offsetWidth;
+    const scoreWidth = 250;
+    const randomX = Math.random() * ((screenSizeX - scoreWidth) - 30) + 30;
+    this.x = randomX; //x(bougera pas mais permet espacer les 3 trashes),
+    this.y = y; // y (pour la chute),
+    this.cssClass = cssClass; // cssClass pour avoir le CSS relié à cette image
+    this.domElement = this.createElement(imgSrc); // imgSrc pour avoir le lien de l'image,
   }
 
-  createElement(src) {
-    const img = document.createElement("img");
-    img.src = src;
-    img.id = this.cssClass + Date.now();
-    img.style.top = this.y + "px";
+  createElement(src) { // créé un nouveau trash dans le DOM qui prend en paramètre une image
+    const img = document.createElement("img"); //
+    img.src = src; // la propriété img.src sera égale au lien de l'image fournie en paramètre
+    img.id = this.cssClass + Date.now(); // un id aléatoire lui sera attribué
+    console.log(img.id);
+    img.style.top = this.y + "px"; //
     img.style.left = this.x + "px";
     img.className = this.cssClass;
     return document.querySelector(".container").appendChild(img);
   }
 
   updateInDom() { // permet de mettre à jour la position du diver dans le CSS et de le voir à l'écran
-    this.domElement.style.left = this.x + "px"; // l'inscrit dans le CSS, par exemple si this.x a bougé de 350 ==> left: "350px"
     this.domElement.style.top = this.y + "px";
   }
 
   fall() {
-    const height = this.domElement.getBoundingClientRect().height;
-    if (this.y < 500) { // 500 = le sable où je veux qu'elle tombe
-      this.y += 1; // why ne s'incrémente pas?
+    if (this.y < 500) { // 500 = le sable où je veux qu'elle tombe ! à éviter
+      this.y += 1;
       this.updateInDom();
     }
   }

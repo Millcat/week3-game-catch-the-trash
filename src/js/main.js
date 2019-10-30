@@ -1,8 +1,8 @@
 const diverImg = document.getElementById("diver");
-const diver = new Diver(50, 0, diverImg);
+const diver = new Diver(380, 250, diverImg);
 
 const turtleImg = document.getElementById("turtle");
-const turtle = new Turtle(800, 430, turtleImg);
+const turtle = new Turtle(800, 380, turtleImg);
 
 const trashShoeImg = document.getElementById("shoe");
 
@@ -32,10 +32,13 @@ function gameLoop() {
     diver.move(keyState); // checke le move à faire en fonction de la touche du clavier
 
     count++;
-    if (count >= 240) {
-        trashes.push(new Trash(150, -50, "./images/trash_images/basket.png", "shoe"));
-        trashes.push(new Trash(450, -50, "./images/trash_images/bouteille.png", "bottle"));
-        count = 0;
+
+    if (count >= 240) { // 1 sec = 60 itérations ==> 4 sec = 240
+        trashes.push(new Trash(-30, "./images/trash_images/basket.png", "shoe"));
+        trashes.push(new Trash(-70, "./images/trash_images/bouteille.png", "bottle"));
+        trashes.push(new Trash(-110, "./images/trash_images/sac-plastique.png", "plasticBag"));
+
+        count = 0; // stoppe la boucle.
     }
 
     turtle.moveLeft(); // first moveLeft
