@@ -3,11 +3,7 @@ class Diver {
     this.x = x;
     this.y = y;
     this.domElement = domElement;
-    this.score = 0;
-    // this.outLeft = false;
-    // this.node = document.createElement("img"); // créer mon image dans mon HTML
-    // document.getElementById("sea-screen").appendChild(this.node);
-    // permet de localiser mon image dans mon HTML (dans la div parent)
+    this.score = 0; // initialise le score à 0
   }
 
   updateInDom() { // permet de mettre à jour la position du diver dans le CSS
@@ -15,10 +11,6 @@ class Diver {
     this.domElement.style.top = this.y + "px";
   }
 
-  catch () {
-    this.score++;
-    document.querySelector(".trashCollected").innerHTML = this.score;
-  }
 
   isOutRight() {
     const screenSizeX = document.querySelector(".container").offsetWidth;
@@ -56,6 +48,12 @@ class Diver {
     }
     this.updateInDom();
   }
+
+  updateScore() {
+    this.score++; // augmente le score à chaque fois que le diver touche
+    document.querySelector(".trashCollected").innerHTML = this.score;
+    // jusqu'à 15 trashes.
+  }
 }
 
 //*******************************************************************/
@@ -66,9 +64,6 @@ class Turtle {
     this.y = y;
     this.domElement = domElement;
     this.outLeft = false;
-    // this.node = document.createElement("img"); // créer mon image dans mon HTML
-    // document.getElementById("sea-screen").appendChild(this.node);
-    // permet de localiser mon image dans mon HTML (dans la div parent)
   }
 
   updateInDom() {
@@ -97,6 +92,7 @@ class Turtle {
     // ne se déplace donc plus de -2 (vers la gauche) car outLeft devient true
     this.updateInDom();
   }
+
   moveRight() {
     const screenSizeX = document.querySelector(".container").offsetWidth;
     const width = this.domElement.getBoundingClientRect().width;
@@ -119,13 +115,14 @@ class Turtle {
 
 
 class Trash {
-  constructor(y, imgSrc, cssClass) {
+  constructor(y, imgSrc, cssClass, weight) {
     // prend en paramètres :
     const screenSizeX = document.querySelector(".container").offsetWidth;
     const scoreWidth = 250;
     const randomX = Math.random() * ((screenSizeX - scoreWidth) - 30) + 30;
-    this.x = randomX; //x(bougera pas mais permet espacer les 3 trashes),
-    this.y = y; // y (pour la chute),
+    this.x = randomX; // attribue une valeur de x random
+    this.y = y; // y point de départ de la chute (à mettre avec val différents pour chaque objet)
+    this.weight = weight; // vitesse de la trash en fonction de son poids ^^)
     this.cssClass = cssClass; // cssClass pour avoir le CSS relié à cette image
     this.domElement = this.createElement(imgSrc); // imgSrc pour avoir le lien de l'image,
   }
@@ -134,26 +131,26 @@ class Trash {
     const img = document.createElement("img"); //
     img.src = src; // la propriété img.src sera égale au lien de l'image fournie en paramètre
     img.id = this.cssClass + Date.now(); // un id aléatoire lui sera attribué
-    img.style.top = this.y + "px"; //
-    img.style.left = this.x + "px";
-    img.className = this.cssClass;
-    return document.querySelector(".container").appendChild(img);
+    img.style.top = this.y + "px"; // lui attribue une valeur y dans le CSS
+    // img.style.left = this.x + "px"; //
+    img.className = this.cssClass; // lui attribue une classe
+    return document.querySelector(".container").appendChild(img); // ajoute l'image dans le container
   }
 
-  updateInDom() { // permet de mettre à jour la position du diver dans le CSS et de le voir à l'écran
+  updateInDom() { // permet de mettre à jour la position du trash dans le CSS et de le voir à l'écran
     this.domElement.style.top = this.y + "px";
   }
 
   fall() {
-    if (this.y < 500) { // 500 = le sable où je veux qu'elle tombe ! à éviter
-      this.y += 2;
+    if (this.y < 500) { // 500 = limite du sable où je veux que le trash tombe
+      this.y += this.weight; // tombe en ajoutant sa vitesse (son poids)
       this.updateInDom();
     }
   }
 
-  touches(catcher) {
-    const aRect = this.domElement.getBoundingClientRect();
-    const bRect = catcher.getBoundingClientRect();
+  touches(catcher) { // zone de collision
+    const aRect = this.domElement.getBoundingClientRect(); // récupère points de contacts de mon trash
+    const bRect = catcher.getBoundingClientRect(); // récupère points de contacts tortue ou diver
 
     return aRect.left < bRect.right &&
       aRect.right > bRect.left &&

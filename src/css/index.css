@@ -104,13 +104,12 @@ h1 {
     right: 150px;
     animation: float 4s ease-in-out infinite;
     animation-delay: 0.5s;
-
 }
 
 .rule {
     text-align: center;
     font-size: 30px;
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 a.button {
@@ -118,7 +117,7 @@ a.button {
     color: white;
     font-size: 30px;
     padding: 20px 30px;
-    border: 2px white;
+    border: 2px solid transparent;
     border-radius: 20px;
     font-weight: 300;
     text-align: center;
@@ -129,8 +128,10 @@ a.button:hover {
     border-color: white;
 }
 
-
 /* ABOVE : CSS for the first page. Put in a different file "start-page.css" for example ? */
+/* ******************************************************* */
+/* BELOW : CSS for the */
+
 
 #sea-screen {
     width: 1000px;
@@ -153,6 +154,8 @@ a.button:hover {
 #turtle {
     width: 100px;
     position: absolute;
+    border: 1px dotted rgba(127, 217, 253, 0.904);
+    border-radius: 5px;
     /* top: 400px;
     left: 700px; */
 }
@@ -184,7 +187,7 @@ a.button:hover {
 .getAndScore {
     border: 5px dotted white;
     border-radius: 10px;
-    width: 200px;
+    width: 250px;
     height: 100px;
     position: absolute;
     right: 0px;
@@ -207,3 +210,7 @@ a.button:hover {
     height: 50px;
     display: block;
 }
+
+
+/* ******************************************************* */
+/* BELOW : CSS for the popUpWin & popUpLoose
