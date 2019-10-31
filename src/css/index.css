@@ -10,7 +10,7 @@ html {
 
 .container {
     font-family: 'Seaweed Script', cursive;
-    color: rgb(17, 80, 122);
+    color: #0873B2;
     width: 1000px;
     height: 600px;
     margin: 0 auto;
@@ -30,7 +30,7 @@ h1 {
     width: 400px;
     font-size: 50px;
     text-align: center;
-    border: 4px dotted #1C6EA4;
+    border: 4px dotted #0873B2;
     border-radius: 10px;
     padding: 5px;
     margin: 0 auto;
@@ -214,28 +214,44 @@ a.button:hover {
 
 
 /* ******************************************************* */
-/* BELOW : CSS for the popUpWin */
+/* BELOW : CSS for the popUp win and loose */
 
-.popUpWin {
+.popUp {
     position: absolute;
-    z-index: 2;
     width: 600px;
     height: 400px;
     top: 105px;
     left: 196px;
     border: 5px dotted white;
-    background-color: #008080;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.popUp.win {
+    background-color: #008080;
+    z-index: 2;
     color: white;
 }
 
-.popUpWin h2 {
+.popUp.loose {
+    background-color: #B29C87;
+    z-index: 3;
+    color: #0873B2;
+}
+
+.popUp.win h2 {
     font-size: 40px;
     display: block;
     margin: 10 auto;
+}
+
+.popUp.loose h2 {
+    font-size: 40px;
+    display: block;
+    margin: 0 auto;
 }
 
 .world {
@@ -243,10 +259,16 @@ a.button:hover {
     display: block;
 }
 
-.popUpWin p {
+.popUp.win p {
     font-size: 30px;
     text-align: center;
     margin: 0px auto 20px;
+}
+
+.popUp.loose p {
+    font-size: 25px;
+    margin: 15px auto 15px;
+    display: block;
 }
 
 .turtleAndWorld {
@@ -260,21 +282,30 @@ a.button:hover {
     margin-bottom: 20px;
 }
 
-a.playAgain {
+a.button {
     text-decoration: none;
-    color: white;
     font-size: 30px;
     padding: 10px 20px;
     border: 2px solid transparent;
     border-radius: 20px;
     font-weight: 300;
     text-align: center;
-    background-color: #94C438;
     margin-bottom: 30px;
+}
+
+a.playAgain.button {
+    background-color: #94C438;
+    color: white;
+
 }
 
 a.playAgain:hover {
     border-color: white;
+}
+
+.sayNoPlastic {
+    display: block;
+    width: 150px;
 }
 
 /* ******************************************************* */
