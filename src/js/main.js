@@ -8,10 +8,6 @@ const trashShoeImg = document.getElementById("shoe");
 
 var trashes = []; // par défaut vide et s'incrémentera avec les trash qui seront pushés dedans
 
-// var popUpWinVisible = document.querySelector(".popUp.win").style.visibility;
-console.log("youWin" + document.querySelector(".popUp"));
-// var popUpLooseVisible = document.querySelector(".popUp.Loose").style.visibility;
-console.log("youLoose" + document.querySelector(".popUp"));
 //************************************************
 // Fluid move
 
@@ -29,11 +25,9 @@ window.onkeyup = function (e) { // quand touche est relevée, le statut de la to
 var count = 0;
 
 function gameLoop() {
-    let trashTouchedIndex; // déclare la variable qui permettra
+    let trashTouchedIndex = 0; // déclare la variable qui permettra de stocker l'index de la trash touchée
     let hasLost = false; // faux tant que trash n'a pas touché tortue
     let hasWin = false; // faux tant que diver n'a pas catch 15 trash
-    // popUpWinVisible.innerHTML = "hidden";
-    // popUpLooseVisible.innerHTML = "hidden";
 
     diver.move(keyState); // checke le move à faire en fonction de la touche du clavier
 
@@ -51,13 +45,13 @@ function gameLoop() {
     turtle.moveRight(); // then moveRight but stop loop after that
 
 
-    trashes.forEach((trash, i) => { // boucle sur mon array d'objets
+    trashes.forEach((trash, i) => { // boucle sur mon array de trash
         trash.fall(); // d'abord, tombe
 
         if (trash.touches(diver.domElement)) { // si une trash touche le diver
-            trashTouchedIndex = i; // récupère l'index de la trash
+            trashTouchedIndex = i; // récupère l'index de la trash touchée dans la variable
             diver.updateScore(); // incrémente le score
-            document.querySelector(".container").removeChild(trash.domElement);
+            document.querySelector(".container").removeChild(trash.domElement); // permet de supprimer visuellement l'image' du DOM
         }
 
         if (trash.touches(turtle.domElement)) { // si le trash touche la tortue
@@ -65,26 +59,15 @@ function gameLoop() {
         }
     });
 
-    if (trashTouchedIndex) { // remove le trash touché de l'array trash
-        trashes.splice(trashTouchedIndex, 1);
-    }
-
-    if (hasLost) { // hasLost is false par defaut => continue la loop si on n'a pas perdu
-        document.querySelector(".popUp.loose").classList.toggle("active")
-        console.log("you loose");
+    if (hasLost) { // hasLost is false par defaut => continue la loop si on n'a pas perdu ou gagné
+        document.querySelector(".popUp.loose").classList.toggle("active");
+        // console.log("you loose");
     } else if (diver.score >= 15) { // si le diver a attrapé 15 objets
         hasWin = true; // alors tu as gagné
-        document.querySelector(".popUp.win").classList.toggle("active")
-        console.log(hasWin);
+        document.querySelector(".popUp.win").classList.toggle("active");
+        // console.log(hasWin);
     } else {
         requestAnimationFrame(gameLoop); // continue le jeu
     }
-
-    // if (hasWin) { // pourquoi fait planter le jeu
-    //     // popUpWinVisible.innerHTML = "visible";
-    //     console.log("you wiin");
-    // } else {
-    //     requestAnimationFrame(gameLoop); // continue le jeu
-    // }
 }
 requestAnimationFrame(gameLoop); //requestAnimationFrame demande au navigateur de faire appel à gameLoop (qui est une callback function)

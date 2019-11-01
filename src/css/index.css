@@ -103,14 +103,15 @@ h1 {
     top: 40%;
     right: 150px;
     animation: float 4s ease-in-out infinite;
-    /* appelle le keyframe nommé ease-in-out = type de transition*/
+    /* 4s = l'image met 4 sec pour faire un A/R.
+    Appelle le keyframe nommé ease-in-out = type de transition */
     animation-delay: 0.5s;
 }
 
 .rule {
     text-align: center;
     font-size: 30px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 a.button {
@@ -147,26 +148,17 @@ a.button:hover {
     width: 200px;
     height: 120px;
     position: absolute;
-    /* top: 200px;
-    left: 100px;
-    pas besoin vu qu'on créé une nouvelle instance*/
 }
 
 #turtle {
     width: 100px;
     position: absolute;
-    border: 1px dotted rgba(127, 217, 253, 0.904);
-    border-radius: 5px;
-    /* top: 400px;
-    left: 700px; */
 }
 
 .shoe {
     width: 70px;
     position: absolute;
     height: 42px;
-    /* top: 0px;
-    left: 100px; */
 }
 
 .bottle {

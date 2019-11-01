@@ -1,19 +1,19 @@
 class Diver {
-  constructor(x, y, domElement) {
+  constructor(x, y, domElement) { // position x, y et image
     this.x = x;
     this.y = y;
     this.domElement = domElement;
     this.score = 0; // initialise le score à 0
   }
 
-  updateInDom() { // permet de mettre à jour la position du diver dans le CSS
+  updateInDom() { // permet de mettre à jour la position de l'image dans le CSS
     this.domElement.style.left = this.x + "px"; // l'inscrit dans le CSS, par exemple si this.x a bougé de 350 ==> left: "350px"
     this.domElement.style.top = this.y + "px";
   }
 
 
   isOutRight() {
-    const screenSizeX = document.querySelector(".container").offsetWidth;
+    const screenSizeX = document.querySelector(".container").offsetWidth; // offsetWidth et not width !!
 
     return this.x > (screenSizeX - diverImg.width); // is out if this.x > (1000-100)
   }
@@ -85,7 +85,7 @@ class Turtle {
   moveLeft() {
     if (this.x > 0 && !this.outLeft) {
       this.x -= 2; // augmente sa vitesse ! = la déplace de 2x -
-      this.domElement.style.transform = "scaleX(1)";
+      this.domElement.style.transform = "scaleX(1)"; // re-tourner l'image
       // console.log("in move left");
     }
     if (this.x <= 0) this.outLeft = true;
@@ -96,7 +96,6 @@ class Turtle {
   moveRight() {
     const screenSizeX = document.querySelector(".container").offsetWidth;
     const width = this.domElement.getBoundingClientRect().width;
-    // A améliorer : ne pas répéter cette ligne isOutRight juste au dessus...
 
     if (this.x + width < screenSizeX && this.outLeft) {
       this.domElement.style.transform = "scaleX(-1)"; // turtle se retourne quand elle part à droite
@@ -124,7 +123,7 @@ class Trash {
     this.y = y; // y point de départ de la chute (à mettre avec val différents pour chaque objet)
     this.weight = weight; // vitesse de la trash en fonction de son poids ^^)
     this.cssClass = cssClass; // cssClass pour avoir le CSS relié à cette image
-    this.domElement = this.createElement(imgSrc); // imgSrc pour avoir le lien de l'image,
+    this.domElement = this.createElement(imgSrc); // domElement crée dans le DOM une nouvelle image. imgSrc pour avoir le lien de l'image,
   }
 
   createElement(src) { // créé un nouveau trash dans le DOM qui prend en paramètre une image
@@ -148,7 +147,7 @@ class Trash {
     }
   }
 
-  touches(catcher) { // zone de collision
+  touches(catcher) { // zone de collision entre trash et catcher
     const aRect = this.domElement.getBoundingClientRect(); // récupère points de contacts de mon trash
     const bRect = catcher.getBoundingClientRect(); // récupère points de contacts tortue ou diver
 
