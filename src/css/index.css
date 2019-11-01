@@ -232,15 +232,21 @@ a.button:hover {
 
 .popUp.win {
     background-color: #008080;
-    z-index: 2;
+    z-index: -100;
     color: white;
 }
 
 .popUp.loose {
     background-color: #B29C87;
-    z-index: 3;
+    z-index: -100;
     color: #0873B2;
 }
+
+.popUp.win.active,
+.popUp.loose.active {
+    z-index: 100;
+}
+
 
 .popUp.win h2 {
     font-size: 40px;
@@ -269,6 +275,7 @@ a.button:hover {
     font-size: 25px;
     margin: 15px auto 15px;
     display: block;
+    text-align: center;
 }
 
 .turtleAndWorld {
